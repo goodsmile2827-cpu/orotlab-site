@@ -48,8 +48,19 @@ footer { margin-top: 64px; color: var(--muted); font-size: 14px; }
   background: linear-gradient(90deg, var(--brand1), var(--brand2)); color: #fff; font-size: 14px; font-weight: 600; }
 .shots { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
   margin: 36px -16px 0; padding: 4px 16px 16px; }
-.shots img { flex: 0 0 auto; width: 220px; height: auto; border-radius: 18px; scroll-snap-align: center;
+/* 스크린샷 한 장 = 버튼. 누르면 크게 본다(lightbox.js) */
+.shot { flex: 0 0 auto; width: 220px; position: relative; padding: 0; border: 0; background: none;
+  border-radius: 18px; overflow: hidden; cursor: pointer; scroll-snap-align: center;
   box-shadow: 0 6px 20px rgba(40, 40, 90, .18); }
+.shot img { display: block; width: 100%; height: auto; transition: transform .25s ease, filter .25s ease; }
+/* 브라우저 돋보기 커서는 윈도우에서 작고 흐려서, 올리면 가운데에 벡터 돋보기 배지를 띄운다 */
+.shot::after { content: ""; position: absolute; inset: 0; margin: auto; width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(255, 255, 255, .94) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233d5ce0' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5 20 20M10.5 7.8v5.4M7.8 10.5h5.4'/%3E%3C/svg%3E") center / 26px no-repeat;
+  box-shadow: 0 6px 18px rgba(20, 20, 60, .28); opacity: 0; transform: scale(.8);
+  transition: opacity .2s ease, transform .2s ease; pointer-events: none; }
+.shot:hover img, .shot:focus-visible img { transform: scale(1.04); filter: brightness(.88); }
+.shot:hover::after, .shot:focus-visible::after { opacity: 1; transform: scale(1); }
+.shot:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 16px; }
 .feature { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 14px; }
 .feature h3 { margin: 0 0 6px; }
@@ -77,12 +88,11 @@ code { font-size: 14px; }
 }
 @media (min-width: 1024px) {
   .shots { overflow: visible; margin: 40px 0 8px; padding: 0; gap: 16px; }
-  .shots img { width: calc((100% - 5 * 16px) / 6); }
+  .shot { width: calc((100% - 5 * 16px) / 6); }
   .features { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* 스크린샷 크게 보기 (lightbox.js) */
-.shots img { cursor: zoom-in; }
 .lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(0, 0, 0, .88);
   display: flex; align-items: center; justify-content: center; padding: 56px 16px; }
 .lightbox[hidden] { display: none; }

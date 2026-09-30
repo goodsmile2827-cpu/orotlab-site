@@ -1,7 +1,8 @@
 // 스크린샷을 누르면 크게 본다. 좌우로 넘기고, 바깥·×·Esc 로 닫는다.
 // 큰 그림은 /img/full/ 의 1080px 판을 쓴다 - 목록의 540px 를 키우면 흐리다.
 (function () {
-  var shots = Array.prototype.slice.call(document.querySelectorAll('.shots img'));
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.shots .shot'));
+  var shots = buttons.map(function (b) { return b.querySelector('img'); });
   if (!shots.length) return;
   var en = document.documentElement.lang === 'en';
 
@@ -43,13 +44,9 @@
     if (opener && opener.focus) opener.focus();
   }
 
-  shots.forEach(function (s, i) {
-    s.tabIndex = 0;
-    s.setAttribute('role', 'button');
-    s.addEventListener('click', function () { open(i); });
-    s.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
-    });
+  // 버튼이라 키보드 초점·Enter 는 브라우저가 해 준다.
+  buttons.forEach(function (b, i) {
+    b.addEventListener('click', function () { open(i); });
   });
 
   box.querySelector('.lb-close').addEventListener('click', close);
