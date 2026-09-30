@@ -80,3 +80,19 @@ code { font-size: 14px; }
   .shots img { width: calc((100% - 5 * 16px) / 6); }
   .features { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* 스크린샷 크게 보기 (lightbox.js) */
+.shots img { cursor: zoom-in; }
+.lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(0, 0, 0, .88);
+  display: flex; align-items: center; justify-content: center; padding: 56px 16px; }
+.lightbox[hidden] { display: none; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 22px; box-shadow: 0 10px 40px rgba(0, 0, 0, .5); }
+.lb-btn { position: absolute; border: 0; background: rgba(255, 255, 255, .14); color: #fff; cursor: pointer;
+  width: 44px; height: 44px; border-radius: 50%; font-size: 28px; line-height: 44px; padding: 0; }
+.lb-btn:hover { background: rgba(255, 255, 255, .26); }
+.lb-close { top: 12px; right: 12px; }
+.lb-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 12px; top: 50%; transform: translateY(-50%); }
+.lb-count { position: absolute; bottom: 16px; left: 0; right: 0; text-align: center; color: rgba(255, 255, 255, .7); font-size: 14px; }
+/* 휴대폰은 밀어서 넘기므로 화살표가 그림을 가리지 않게 숨긴다 */
+@media (max-width: 719px) { .lb-prev, .lb-next { display: none; } }
