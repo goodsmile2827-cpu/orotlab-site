@@ -55,3 +55,12 @@ footer { margin-top: 64px; color: var(--muted); font-size: 14px; }
 .feature h3 { margin: 0 0 6px; }
 .feature p { margin: 0; color: var(--muted); font-size: 15px; }
 ul.needs { padding-left: 20px; color: var(--muted); }
+
+/* 지원 */
+.contact { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 8px; }
+details { border-bottom: 1px solid var(--line); padding: 10px 0; }
+details summary { cursor: pointer; font-weight: 600; }
+details[open] summary { margin-bottom: 4px; }
+details p, details ul { margin: 6px 0 4px; color: var(--muted); }
+details li { color: var(--muted); }
+code { font-size: 14px; }
