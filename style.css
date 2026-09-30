@@ -65,15 +65,18 @@ details p, details ul { margin: 6px 0 4px; color: var(--muted); }
 details li { color: var(--muted); }
 code { font-size: 14px; }
 
-/* PC 폭 - 휴대폰은 위의 한 줄 배치 그대로 */
-@media (min-width: 1024px) {
+/* 넓은 화면 - 휴대폰은 위의 한 줄 배치 그대로.
+   720: 작은 노트북(1280x720 을 150% 배율로 쓰면 CSS 폭 ~850), 태블릿 가로
+   1024: 스크린샷 여섯 장을 한 줄에 - 이보다 좁으면 장당 120px 아래로 작아져 옆으로 넘기는 게 낫다 */
+@media (min-width: 720px) {
   main.wide { max-width: 1080px; }
-  main.wide > p, main.wide > ul, main.wide > h2, main.wide > header, main.wide > .contact {
-    max-width: 760px; margin-left: auto; margin-right: auto; }
+  main.wide > p, main.wide > ul, main.wide > h2, main.wide > header, main.wide > .contact,
+  #en > h1, #en > .contact { max-width: 760px; margin-left: auto; margin-right: auto; }
+  .faq { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; align-items: start; }
+  .faq-group h2 { margin-top: 32px; }
+}
+@media (min-width: 1024px) {
   .shots { overflow: visible; margin: 40px 0 8px; padding: 0; gap: 16px; }
   .shots img { width: calc((100% - 5 * 16px) / 6); }
   .features { grid-template-columns: repeat(3, 1fr); }
-  .faq { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; align-items: start; }
-  .faq-group h2 { margin-top: 32px; }
-  #en > h1, #en > .contact { max-width: 760px; margin-left: auto; margin-right: auto; }
 }
